@@ -26,12 +26,14 @@ export default function Posts(): JSX.Element {
       ) : posts === undefined ? (
         <p>Posts is undefined</p>
       ) : (
-        <div className=" px-44">
+        <div className="flex w-full flex-col justify-center">
           {posts.map(({ id, title }) => (
-            <Link key={id} to={`/Post/${id}`}>
-              <h1 className="py-2 text-xl font-bold text-black hover:text-purple">
-                {id}. {title}
-              </h1>
+            <Link
+              key={id}
+              to={`/Post/${id}`}
+              className="w-full py-1 text-center text-xl font-bold text-black hover:text-purple"
+            >
+              {id}. {title}
             </Link>
           ))}
         </div>

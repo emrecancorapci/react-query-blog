@@ -1,7 +1,7 @@
 {
-  "name": "vite-react-typescript-tanstackquery-tailwindcss",
+  "name": "react-tanstackqueryv4-basic",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "engines": {
     "node": ">=16.0.0"
@@ -47,7 +47,6 @@
     "eslint-plugin-testing-library": "^5.11.0",
     "eslint-plugin-unicorn": "^47.0.0",
     "postcss": "^8.4.24",
-    "postcss-styled-syntax": "^0.4.0",
     "prettier": "^2.8.8",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.1.6",

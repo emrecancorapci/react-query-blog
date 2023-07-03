@@ -39,5 +39,4 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
 .eslintcache

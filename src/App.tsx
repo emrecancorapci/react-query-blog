@@ -7,7 +7,7 @@ function App(): JSX.Element {
   return (
     <>
       <Header />
-      <main>
+      <main className="flex max-w-3xl flex-col justify-center self-center px-4 py-2">
         <Suspense fallback={<p>Loading...</p>}>
           <Router />
         </Suspense>
