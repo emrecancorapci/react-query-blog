@@ -10,11 +10,8 @@ export default function Header(): JSX.Element {
           Tanstack Query v4
         </a>{' '}
         and{' '}
-        <a
-          className="text-purple-dark hover:text-purple active:text-purple-light"
-          href="https://jsonplaceholder.typicode.com/"
-        >
-          JSON Placeholder API
+        <a className="text-purple-dark hover:text-purple active:text-purple-light" href="https://dummyjson.com">
+          DummyJSON
         </a>
       </h1>
     </header>

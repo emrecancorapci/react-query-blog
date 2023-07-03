@@ -31,7 +31,9 @@ export default function Comments({ postId }: { postId: number }): JSX.Element {
         <div className="px-4 pt-4">
           {comments.map(({ id, body, user: { id: userId, username } }) => (
             <div key={id} className="flex flex-col py-1">
-              <h3 className="text-lg font-bold text-purple-dark">{username}</h3>
+              <Link to={`/User/${userId}`} className="text-lg font-bold text-purple-dark">
+                {username}
+              </Link>
               <p className="text-black">{body}</p>
             </div>
           ))}
