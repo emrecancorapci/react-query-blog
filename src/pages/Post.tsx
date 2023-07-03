@@ -3,6 +3,7 @@ import axios from 'axios';
 import { type UseQueryResult, useQuery } from '@tanstack/react-query';
 
 import { type IPost } from '../types';
+import Comments from '../components/Comments';
 
 export default function Post(): JSX.Element {
   const { id } = useParams();
@@ -35,6 +36,7 @@ export default function Post(): JSX.Element {
         <div>
           <h1 className="pb-2 text-3xl font-bold">{post.title}</h1>
           <p>{post.body}</p>
+          <Comments postId={post.id} />
         </div>
       )}
       <Link className="self-end" to="/">
