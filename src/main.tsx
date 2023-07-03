@@ -11,10 +11,10 @@ import './index.css';
 const queryClient = new QueryClient();
 
 const body = document.querySelector('body') as HTMLElement;
-body.className = 'min-h-screen overflow-x-hidden';
+body.className = 'flex justify-center h-screen w-full overflow-x-hidden bg-white overflow-y-scroll';
 
 const dom = document.querySelector('#root') as HTMLElement;
-dom.className = 'flex min-h-screen justify-center overflow-x-hidden bg-white';
+dom.className = 'flex max-w-full flex-col text-black lg:max-w-screen-lg';
 
 const root = createRoot(dom);
 
