@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { useQuery } from '@tanstack/react-query';
+import { type UseQueryResult, useQuery } from '@tanstack/react-query';
 
 import { type IPost } from '../types';
 
@@ -15,7 +15,7 @@ export default function Post(): JSX.Element {
     isLoading,
     isError,
     error,
-  } = useQuery({
+  }: UseQueryResult<IPost, Error> = useQuery({
     queryKey: ['posts', id],
     queryFn: async () => await axios.get(`https://dummyjson.com/posts/${id}`),
     select(data) {
@@ -37,8 +37,10 @@ export default function Post(): JSX.Element {
           <p>{post.body}</p>
         </div>
       )}
-      <Link className="self-end " to="/">
-        <button className="mt-4 rounded-md bg-purple px-4 py-2 text-white hover:bg-purple-dark">Back</button>
+      <Link className="self-end" to="/">
+        <button className="mt-4 rounded-md bg-purple px-4 py-2 font-semibold text-white hover:bg-purple-dark">
+          Back
+        </button>
       </Link>
     </div>
   );
