@@ -1,8 +1,8 @@
 export default function Header(): JSX.Element {
   return (
     <header>
-      <h1 className="px-24 py-4 text-5xl font-black">
-        A Blog Site using{' '}
+      <h1 className=" max-w-full px-2 py-4 text-center text-4xl font-black lg:px-16 lg:text-5xl">
+        A Basic Blog Site using{' '}
         <a
           className="text-purple-dark hover:text-purple active:text-purple-light"
           href="https://tanstack.com/query/v4/"
@@ -14,7 +14,7 @@ export default function Header(): JSX.Element {
           className="text-purple-dark hover:text-purple active:text-purple-light"
           href="https://jsonplaceholder.typicode.com/"
         >
-          JSON Placeholder
+          JSON Placeholder API
         </a>
       </h1>
     </header>
