@@ -14,7 +14,7 @@ const body = document.querySelector('body') as HTMLElement;
 body.className = 'min-h-screen overflow-x-hidden';
 
 const dom = document.querySelector('#root') as HTMLElement;
-dom.className = 'flex min-h-screen flex-col justify-between overflow-x-hidden';
+dom.className = 'flex min-h-screen justify-center overflow-x-hidden bg-white';
 
 const root = createRoot(dom);
 
