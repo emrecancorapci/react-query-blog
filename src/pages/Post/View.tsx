@@ -2,8 +2,8 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { type UseQueryResult, useQuery } from '@tanstack/react-query';
 
-import { type IPost } from '../types';
-import Comments from '../components/Comments';
+import { type IPost } from '../../types';
+import Comments from '../../components/Comments';
 
 export default function Post(): JSX.Element {
   const { id } = useParams();
@@ -34,7 +34,12 @@ export default function Post(): JSX.Element {
         <p>Post is not found</p>
       ) : (
         <div>
-          <h1 className="pb-2 text-3xl font-bold">{post.title}</h1>
+          <h1 className="text-3xl font-bold">{post.title}</h1>
+          <p className="py-2 font-bold">
+            {post.tags.map((t, index) => {
+              return t + (post.tags.length > index + 1 ? ', ' : '');
+            })}
+          </p>
           <p>{post.body}</p>
           <Comments postId={post.id} />
         </div>

@@ -72,6 +72,11 @@
   ],
   "rules": {
     "@typescript-eslint/no-unused-vars" : "off",
+    "@typescript-eslint/no-misused-promises": [2, {
+      "checksVoidReturn": {
+        "attributes": false
+      }
+    }],
     "import/no-unresolved": "error",
     "n/no-missing-import": "off",
     "no-unused-vars": "off",

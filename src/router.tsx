@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 
 import Posts from './pages/Posts';
-import Post from './pages/Post';
-import User from './pages/User';
+import Post from './pages/Post/View';
+import User from './pages/User/View';
 
 export default function Router(): JSX.Element {
   return (
