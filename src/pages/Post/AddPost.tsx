@@ -1,11 +1,14 @@
 import axios, { type AxiosResponse } from 'axios';
 import { useMutation, useQueryClient, type UseMutationResult } from '@tanstack/react-query';
 
-import type { IPostRequest, IPostResponse } from '../../types';
 import PostAddForm from '../../components/forms/post/AddPostForm';
+import useAuthStore from '../../stores/AuthStore';
+
 import type { FormInputs } from '../../components/forms/post/AddPostForm';
+import type { IPostRequest, IPostResponse } from '../../types';
 
 export default function PostAdd(): JSX.Element {
+  const user = useAuthStore((state) => state.user);
   const qc = useQueryClient();
   const {
     isLoading,
@@ -15,10 +18,13 @@ export default function PostAdd(): JSX.Element {
     mutateAsync,
   }: UseMutationResult<AxiosResponse<IPostResponse>, Error, FormInputs, void> = useMutation({
     mutationFn: async (formData: FormInputs) => {
+      if (user === undefined) {
+        throw new Error('User not logged in.');
+      }
       const request: IPostRequest = {
         ...formData,
         tags: formData.tags.map((tag) => tag.tag),
-        userId: 1,
+        userId: user.id,
       };
       return await axios.post<IPostResponse>('https://dummyjson.com/posts/add', request);
     },
