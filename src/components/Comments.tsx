@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { type UseQueryResult, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-import { type IComment } from '../types';
+import type { UseQueryResult } from '@tanstack/react-query';
+import type { IComment } from '../types';
 
-export default function Comments({ postId }: { postId: number }): JSX.Element {
+interface CommentsProperties {
+  postId: number;
+}
+
+export default function Comments({ postId }: CommentsProperties): JSX.Element {
   const {
     data: comments,
     isLoading,

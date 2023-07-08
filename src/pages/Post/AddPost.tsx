@@ -1,9 +1,11 @@
-import axios, { type AxiosResponse } from 'axios';
-import { useMutation, useQueryClient, type UseMutationResult } from '@tanstack/react-query';
+import axios from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import PostAddForm from '../../components/forms/post/AddPostForm';
 import useAuthStore from '../../stores/AuthStore';
 
+import type { UseMutationResult } from '@tanstack/react-query';
+import type { AxiosResponse } from 'axios';
 import type { FormInputs } from '../../components/forms/post/AddPostForm';
 import type { IPostRequest, IPostResponse } from '../../types';
 

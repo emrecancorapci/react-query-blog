@@ -1,7 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { type UseQueryResult, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
+import type { UseQueryResult } from '@tanstack/react-query';
 import type { IUser } from '../../types/IUser';
 
 export default function User(): JSX.Element {

@@ -1,9 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { type UseQueryResult, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
-import { type IPostResponse } from '../../types';
 import Comments from '../../components/Comments';
+
+import type { UseQueryResult } from '@tanstack/react-query';
+import type { IPostResponse } from '../../types';
 
 export default function Post(): JSX.Element {
   const { id } = useParams();
@@ -20,7 +22,7 @@ export default function Post(): JSX.Element {
     queryKey: ['posts', Number(id)],
     queryFn: async () => await axios.get(`https://dummyjson.com/posts/${id}`),
     select(data) {
-      return data.data as IPostResponse;
+      return data.data;
     },
   });
 

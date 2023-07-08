@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import axios from 'axios';
-
 import useAuthStore from '../stores/AuthStore';
-import LoginForm, { type FormInputs } from '../components/forms/auth/LoginForm';
+import LoginForm from '../components/forms/auth/LoginForm';
 
-import { type IUserToken } from '../types';
+import type { FormInputs } from '../components/forms/auth/LoginForm';
+import type { IUserToken } from '../types';
 
 interface ILoginResponse extends IUserToken {
   token: string;

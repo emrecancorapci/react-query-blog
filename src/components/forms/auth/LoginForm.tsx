@@ -1,5 +1,7 @@
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import Button from '../../common/Button';
+
+import type { SubmitHandler } from 'react-hook-form';
 
 export interface FormInputs {
   username: string;

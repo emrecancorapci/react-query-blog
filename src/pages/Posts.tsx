@@ -1,8 +1,9 @@
-import axios from 'axios';
-import { type UseQueryResult, useQuery } from '@tanstack/react-query';
-
-import { type IPost } from '../types';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+
+import type { UseQueryResult } from '@tanstack/react-query';
+import type { IPostResponse } from '../types';
 
 export default function Posts(): JSX.Element {
   const {
@@ -10,11 +11,11 @@ export default function Posts(): JSX.Element {
     data: posts,
     isError,
     error,
-  }: UseQueryResult<IPost[], Error> = useQuery({
+  }: UseQueryResult<IPostResponse[], Error> = useQuery({
     queryKey: ['posts'],
     queryFn: async () => await axios.get('https://dummyjson.com/posts'),
     select(data) {
-      return data.data.posts as IPost[];
+      return data.data.posts;
     },
   });
   return (
