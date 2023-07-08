@@ -1,5 +1,6 @@
 import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form';
 import Button from '../../common/Button';
+import { useEffect } from 'react';
 
 export interface FormInputs {
   title: string;
@@ -20,12 +21,21 @@ export default function PostAddForm({ onSubmit }: { onSubmit: SubmitHandler<Form
     control,
   });
 
+  useEffect(() => {
+    if (fields.length === 0) {
+      append({ tag: '' });
+    }
+  }, [append, fields.length]);
+
   return (
-    <form className="flex flex-col content-center items-center gap-6 p-4 px-12" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="flex w-full flex-col content-center items-center gap-4 p-4 px-12"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <label className="w-full" htmlFor="titleControl">
-        <p className="pb-2">Title</p>
+        <p className="pb-2 ps-2 font-semibold">Title</p>
         <input
-          className="w-full"
+          className="w-full rounded-lg bg-purple-dark px-4 py-2 font-medium text-white"
           placeholder="Enter the title"
           type="text"
           id="titleControl"
@@ -39,9 +49,9 @@ export default function PostAddForm({ onSubmit }: { onSubmit: SubmitHandler<Form
         )}
       </label>
       <label className="w-full" htmlFor="contentControl">
-        <p className="pb-2">content</p>
+        <p className="pb-2 ps-2 font-semibold">Content</p>
         <input
-          className="w-full"
+          className="w-full rounded-lg bg-purple-dark px-4 py-2 font-medium text-white"
           placeholder="Tell your story"
           type="content"
           id="contentControl"
@@ -55,26 +65,38 @@ export default function PostAddForm({ onSubmit }: { onSubmit: SubmitHandler<Form
           </p>
         )}
       </label>
-      <label className="w-full" htmlFor="tagsControl">
-        <p className="pb-2">Tags</p>
+      <label className="flex w-auto flex-col gap-2" htmlFor="tagsControl">
+        <p className="ps-2 font-semibold">Tags</p>
         {fields.map((field, index) => (
-          <div key={field.id}>
+          <div className="flex w-full max-w-fit gap-4" key={field.id}>
             <input
-              className="w-full"
+              className="rounded-lg bg-purple-dark px-4 py-2 font-medium text-white"
               placeholder="Enter the tag"
               type="text"
               id="tagsControl"
               aria-invalid={errors.tags === undefined ? 'false' : 'true'}
               {...register(`tags.${index}.tag`)}
             />
-            {index > 0 && (
+            {index > 0 ? (
               <Button
+                className=""
                 type="button"
                 onClick={() => {
                   remove(index);
                 }}
               >
-                Remove Tag
+                X
+              </Button>
+            ) : (
+              <Button
+                className=""
+                type="button"
+                onClick={() => {
+                  remove(index);
+                }}
+                disabled={true}
+              >
+                X
               </Button>
             )}
           </div>
