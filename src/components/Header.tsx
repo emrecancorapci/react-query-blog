@@ -49,7 +49,7 @@ export default function Header(): JSX.Element {
             <Link to="/Post/Add">
               <Button>Add Post</Button>
             </Link>
-            <Link to="/Profile">
+            <Link to={`/User/${user.id}`}>
               <Button>Profile</Button>
             </Link>
             <Button

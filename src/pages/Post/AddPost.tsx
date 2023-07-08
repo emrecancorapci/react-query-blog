@@ -9,7 +9,7 @@ import type { AxiosResponse } from 'axios';
 import type { FormInputs } from '../../components/forms/post/AddPostForm';
 import type { IPostRequest, IPostResponse } from '../../types';
 
-export default function PostAdd(): JSX.Element {
+export default function AddPost(): JSX.Element {
   const user = useAuthStore((state) => state.user);
   const qc = useQueryClient();
   const {

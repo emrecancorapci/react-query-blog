@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import type { UseQueryResult } from '@tanstack/react-query';
 import type { IPostResponse } from '../types';
 
-export default function Posts(): JSX.Element {
+export default function Home(): JSX.Element {
   const {
     isLoading,
     data: posts,

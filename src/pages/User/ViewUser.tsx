@@ -5,8 +5,13 @@ import { useQuery } from '@tanstack/react-query';
 import type { UseQueryResult } from '@tanstack/react-query';
 import type { IUser } from '../../types/IUser';
 
-export default function User(): JSX.Element {
-  const { id } = useParams();
+interface UserViewProperties {
+  userId?: string;
+}
+
+export default function ViewUser({ userId }: UserViewProperties): JSX.Element {
+  const { id: parameterId } = useParams();
+  const id = userId ?? parameterId;
 
   if (typeof id !== 'string') throw new Error('id is not a string');
 

@@ -7,7 +7,7 @@ import Comments from '../../components/Comments';
 import type { UseQueryResult } from '@tanstack/react-query';
 import type { IPostResponse } from '../../types';
 
-export default function Post(): JSX.Element {
+export default function ViewPost(): JSX.Element {
   const { id } = useParams();
 
   if (typeof id !== 'string') throw new Error('id is not a string');
