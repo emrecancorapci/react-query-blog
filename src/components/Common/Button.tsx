@@ -18,7 +18,9 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`rounded-md bg-purple px-4 py-2 font-semibold text-white hover:bg-purple-dark ${className ?? ''}`}
+      className={`rounded-md bg-purple px-4 py-2 font-semibold text-white hover:bg-purple-dark disabled:bg-neutral-800 ${
+        className ?? ''
+      }`}
       onClick={onClick}
       hidden={hidden}
       disabled={disabled}

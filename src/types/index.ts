@@ -1,3 +1,4 @@
+export type { InfiniteResponse as IInfinitePostResponse } from './IPost';
 export type { Response as IPostResponse } from './IPost';
 export type { Request as IPostRequest } from './IPost';
 export type { IComment } from './IComment';

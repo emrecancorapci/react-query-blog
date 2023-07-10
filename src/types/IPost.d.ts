@@ -7,6 +7,13 @@ export interface Response {
   reactions: number;
 }
 
+export interface InfiniteResponse {
+  posts: Response[];
+  limit: number;
+  skip: number;
+  total: number;
+}
+
 export interface Request {
   title: string;
   body: string;
