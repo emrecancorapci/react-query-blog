@@ -1,14 +1,7 @@
+import type { IAddress } from './IAddress';
+
 export interface ICompany {
-  address: {
-    address: string;
-    city: string;
-    coordinates: {
-      lat: number;
-      lng: number;
-    };
-    postalCode: string;
-    state: string;
-  };
+  address: IAddress;
   department: string;
   name: string;
   title: string;

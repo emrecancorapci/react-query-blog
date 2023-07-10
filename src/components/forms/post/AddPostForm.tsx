@@ -50,10 +50,9 @@ export default function PostAddForm({ onSubmit }: { onSubmit: SubmitHandler<Form
       </label>
       <label className="w-full" htmlFor="contentControl">
         <p className="pb-2 ps-2 font-semibold">Content</p>
-        <input
+        <textarea
           className="w-full rounded-lg bg-purple-dark px-4 py-2 font-medium text-white"
           placeholder="Tell your story"
-          type="content"
           id="contentControl"
           aria-invalid={errors.body === undefined ? 'false' : 'true'}
           {...register('body', { required: true, minLength: 7 })}
@@ -89,7 +88,7 @@ export default function PostAddForm({ onSubmit }: { onSubmit: SubmitHandler<Form
               </Button>
             ) : (
               <Button
-                className=""
+                className="disabled:opacity-0"
                 type="button"
                 onClick={() => {
                   remove(index);
