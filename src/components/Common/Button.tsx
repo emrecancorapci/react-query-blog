@@ -2,6 +2,7 @@ import type { Ref, ButtonHTMLAttributes } from 'react';
 
 interface ButtonProperties extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: JSX.Element | string;
+  background?: { default: string; hover?: string; active?: string };
   reference?: Ref<HTMLButtonElement> | null | undefined;
   type?: 'button' | 'submit' | 'reset' | undefined;
   className?: string;
@@ -14,18 +15,19 @@ export default function Button({
   children,
   type = 'button',
   reference,
-  className,
+  className = '',
+  background,
   onClick,
   hidden = false,
   disabled = false,
 }: ButtonProperties): JSX.Element {
+  const bgDefault = `bg-${background?.default ?? 'purple-dark'}`;
+  const bgHover = `hover:bg-${background?.hover ?? 'purple'}`;
   return (
     <button
       type={type}
       ref={reference ?? undefined}
-      className={`rounded-md bg-purple px-4 py-2 font-semibold text-white hover:bg-purple-dark disabled:bg-neutral-800 ${
-        className ?? ''
-      }`}
+      className={`rounded-md ${bgDefault} px-4 py-2 font-semibold text-white ${bgHover} disabled:bg-neutral-800 ${className}`}
       onClick={onClick}
       hidden={hidden}
       disabled={disabled}
