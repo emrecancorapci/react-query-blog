@@ -26,7 +26,8 @@ export default function Home(): JSX.Element {
   }: UseInfiniteQueryResult<IInfinitePostResponse, Error> = useInfiniteQuery({
     queryKey: ['posts'],
     queryFn: async ({ pageParam: pageParameter = 0 }) => {
-      const response = await axios.get(`https://dummyjson.com/posts?limit=${limit}&skip=${pageParameter as number}`);
+      const url = `https://dummyjson.com/posts?limit=${limit}&skip=${pageParameter as number}`;
+      const response = await axios.get(url);
       return response.data as IInfinitePostResponse;
     },
     getNextPageParam: (firstPage) => {
@@ -34,13 +35,14 @@ export default function Home(): JSX.Element {
       return firstPage.skip + firstPage.limit;
     },
     getPreviousPageParam: (lastPage) => {
-      if (lastPage === undefined || lastPage.skip + lastPage.limit >= lastPage.total || lastPage.skip < 0) return;
-      return lastPage.skip + lastPage.limit;
+      if (lastPage === undefined || lastPage.skip - lastPage.limit >= lastPage.total || lastPage.skip <= 0) return;
+      return lastPage.skip - lastPage.limit;
     },
   });
 
   useEffect(() => {
     if (inView) {
+      console.log(inView);
       fetchNextPage().catch((error) => {
         console.error(error);
       });
@@ -73,20 +75,20 @@ export default function Home(): JSX.Element {
                 <Link
                   key={id}
                   to={`/Post/${id}`}
-                  className="w-full py-1 text-center text-xl font-bold text-black hover:text-purple"
+                  className="my-1 w-full rounded-lg px-8 py-1 text-center text-xl font-bold text-black bg-purple/10  hover:text-purple"
                 >
                   {id}. {title}
                 </Link>
               ))}
             </Fragment>
           ))}
-          <button
-            ref={ref}
+          <Button
+            reference={ref}
             onClick={async () => await fetchNextPage()}
             disabled={!(hasNextPage ?? false) || isFetchingNextPage}
           >
             {isFetchingNextPage ? 'Loading more...' : hasNextPage ?? false ? 'Load Newer' : 'Nothing more to load'}
-          </button>
+          </Button>
           {isFetching && !isFetchingNextPage ? <p>Background Updating...</p> : undefined}
         </div>
       )}

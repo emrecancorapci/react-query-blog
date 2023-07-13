@@ -89,7 +89,7 @@ This project is a simple blog that uses [DummyJSON](https://dummyjson.com/) as *
 - [x] Create new blog post page
 - [x] Create simple navigation bar
 - [x] Implement authentication and authorization
-- [ ] Implement pagination and infinite scroll
+- [x] Implement pagination and infinite scroll
 - [ ] Redesign the profile page
 - [ ] Create tag pages
 - [ ] Implement dark mode
