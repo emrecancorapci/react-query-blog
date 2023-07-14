@@ -1,6 +1,8 @@
 import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form';
-import Button from '../../common/Button';
 import { useEffect } from 'react';
+
+import Button from '../../common/Button';
+import { Input, Textarea, Title, FormAlert } from '../../common/form';
 
 export interface FormInputs {
   title: string;
@@ -8,7 +10,11 @@ export interface FormInputs {
   tags: Array<{ tag: string }>;
 }
 
-export default function PostAddForm({ onSubmit }: { onSubmit: SubmitHandler<FormInputs> }): JSX.Element {
+interface PostAddFormProperties {
+  onSubmit: SubmitHandler<FormInputs>;
+}
+
+export default function PostAddForm({ onSubmit }: PostAddFormProperties): JSX.Element {
   const {
     register,
     handleSubmit,
@@ -33,53 +39,44 @@ export default function PostAddForm({ onSubmit }: { onSubmit: SubmitHandler<Form
       onSubmit={handleSubmit(onSubmit)}
     >
       <label className="w-full" htmlFor="titleControl">
-        <p className="pb-2 ps-2 font-semibold">Title</p>
-        <input
-          className="w-full rounded-lg bg-purple-dark px-4 py-2 font-medium text-white"
+        <Title>Post Title</Title>
+        <Input
           placeholder="Enter the title"
-          type="text"
           id="titleControl"
           aria-invalid={errors.title === undefined ? 'false' : 'true'}
           {...register('title', { required: true })}
         />
         {errors.title !== undefined && (
-          <p role="alert" className="pt-2 text-xs text-red-600">
-            {errors.title?.type === 'required' && 'Title is required.'}
-          </p>
+          <FormAlert>{errors.title?.type === 'required' && 'Title is required.'}</FormAlert>
         )}
       </label>
       <label className="w-full" htmlFor="contentControl">
-        <p className="pb-2 ps-2 font-semibold">Content</p>
-        <textarea
-          className="w-full rounded-lg bg-purple-dark px-4 py-2 font-medium text-white"
+        <Title>Content</Title>
+        <Textarea
           placeholder="Tell your story"
           id="contentControl"
           aria-invalid={errors.body === undefined ? 'false' : 'true'}
           {...register('body', { required: true, minLength: 7 })}
         />
         {errors.body !== undefined && (
-          <p role="alert" className="pt-2 text-xs text-red-600">
+          <FormAlert>
             {errors.body?.type === 'required' && 'Content is required.'}
             {errors.body?.type === 'minLength' && 'Content should be longer than 7 characters.'}
-          </p>
+          </FormAlert>
         )}
       </label>
       <label className="flex w-auto flex-col gap-2" htmlFor="tagsControl">
-        <p className="ps-2 font-semibold">Tags</p>
+        <Title>Tags</Title>
         {fields.map((field, index) => (
           <div className="flex w-full max-w-fit gap-4" key={field.id}>
-            <input
-              className="rounded-lg bg-purple-dark px-4 py-2 font-medium text-white"
-              placeholder="Enter the tag"
-              type="text"
+            <Input
               id="tagsControl"
+              placeholder="Enter tag name"
               aria-invalid={errors.tags === undefined ? 'false' : 'true'}
               {...register(`tags.${index}.tag`)}
             />
             {index > 0 ? (
               <Button
-                className=""
-                type="button"
                 onClick={() => {
                   remove(index);
                 }}
@@ -89,11 +86,10 @@ export default function PostAddForm({ onSubmit }: { onSubmit: SubmitHandler<Form
             ) : (
               <Button
                 className="disabled:opacity-0"
-                type="button"
+                disabled={true}
                 onClick={() => {
                   remove(index);
                 }}
-                disabled={true}
               >
                 X
               </Button>
@@ -101,12 +97,11 @@ export default function PostAddForm({ onSubmit }: { onSubmit: SubmitHandler<Form
           </div>
         ))}
         <Button
-          type="button"
           onClick={() => {
             append({ tag: '' });
           }}
         >
-          Add Tag
+          Add
         </Button>
       </label>
       <Button type="submit">Submit</Button>

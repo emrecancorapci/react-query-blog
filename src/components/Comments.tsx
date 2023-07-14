@@ -33,9 +33,9 @@ export default function Comments({ postId }: CommentsProperties): JSX.Element {
       ) : comments === undefined ? (
         <p>Posts is undefined</p>
       ) : (
-        <div className="px-4 pt-4">
+        <div className="flex flex-col gap-3 px-4 pt-4">
           {comments.map(({ id, body, user: { id: userId, username } }) => (
-            <div key={id} className="flex flex-col py-1">
+            <div key={id} className="flex flex-col rounded-lg bg-purple/20 px-4 py-2">
               <Link to={`/User/${userId}`} className="text-lg font-bold text-purple-dark">
                 {username}
               </Link>

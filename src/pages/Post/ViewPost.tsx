@@ -1,7 +1,8 @@
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
+import Button from '../../components/common/Button';
 import Comments from '../../components/Comments';
 
 import type { UseQueryResult } from '@tanstack/react-query';
@@ -9,6 +10,7 @@ import type { IPostResponse } from '../../types';
 
 export default function ViewPost(): JSX.Element {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   if (typeof id !== 'string') throw new Error('id is not a string');
   if (Number(id) < 1) throw new Error('id is not a valid number');
@@ -36,21 +38,27 @@ export default function ViewPost(): JSX.Element {
         <p>Post is not found</p>
       ) : (
         <div>
-          <h1 className="text-3xl font-bold">{post.title}</h1>
-          <p className="py-2 font-bold">
-            {post.tags.map((t, index) => {
-              return t + (post.tags.length > index + 1 ? ', ' : '');
-            })}
-          </p>
-          <p>{post.body}</p>
+          <div className="rounded-lg bg-purple/20 p-4 py-6">
+            <h1 className="text-3xl font-bold">{post.title}</h1>
+            <p className="pb-4 font-bold">
+              {post.tags.map((t, index) => {
+                return t + (post.tags.length > index + 1 ? ', ' : '');
+              })}
+            </p>
+            <p>{post.body}</p>
+          </div>
           <Comments postId={post.id} />
         </div>
       )}
-      <Link className="self-end" to="/">
-        <button className="mt-4 rounded-md bg-purple px-4 py-2 font-semibold text-white hover:bg-purple-dark">
+      <div className="flex w-full justify-end py-2">
+        <Button
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
           Back
-        </button>
-      </Link>
+        </Button>
+      </div>
     </>
   );
 }

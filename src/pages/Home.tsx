@@ -58,7 +58,7 @@ export default function Home(): JSX.Element {
       ) : posts === undefined ? (
         <p>Posts is undefined</p>
       ) : (
-        <div className="flex w-full flex-col justify-center">
+        <div className="flex w-full flex-col justify-center gap-2">
           <Button
             onClick={async () => await fetchPreviousPage()}
             disabled={!(hasPreviousPage ?? false) || isFetchingPreviousPage}
@@ -75,7 +75,7 @@ export default function Home(): JSX.Element {
                 <Link
                   key={id}
                   to={`/Post/${id}`}
-                  className="my-1 w-full rounded-lg px-8 py-1 text-center text-xl font-bold text-black bg-purple/10  hover:text-purple"
+                  className="w-full rounded-lg bg-purple/10 px-8 py-1 text-center text-xl font-bold text-black hover:text-purple"
                 >
                   {id}. {title}
                 </Link>

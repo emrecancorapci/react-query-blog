@@ -11,7 +11,7 @@ export default function Header(): JSX.Element {
     console.log(pathname);
   }, [pathname]);
   return (
-    <header>
+    <header className="flex flex-col justify-center">
       <h1 className=" max-w-full px-2 py-4 text-center text-4xl font-black lg:px-16 lg:text-5xl">
         A Basic Blog Site using{' '}
         <a
@@ -25,42 +25,45 @@ export default function Header(): JSX.Element {
           DummyJSON
         </a>
       </h1>
-      <nav className="flex justify-center gap-4">
-        {pathname !== '/' && (
-          <Link className="w-min" to="/">
-            <Button>Home</Button>
-          </Link>
-        )}
-
-        {user === undefined && pathname === '/Login' && (
-          <Link className="w-min" to="/Register">
-            <Button>Register</Button>
-          </Link>
-        )}
-
-        {user === undefined && pathname !== '/Login' && (
-          <Link className="w-min" to="/Login">
-            <Button>Login</Button>
-          </Link>
-        )}
-
-        {user !== undefined && (
-          <>
-            <Link to="/Post/Add">
-              <Button>Add Post</Button>
+      <nav className="flex w-full max-w-2xl justify-between gap-4 self-center px-2">
+        <div className="">
+          {pathname !== '/' && (
+            <Link className="w-min" to="/">
+              <Button>Home</Button>
             </Link>
-            <Link to={`/User/${user.id}`}>
-              <Button>Profile</Button>
+          )}
+        </div>
+        <div className="flex gap-2">
+          {user === undefined && pathname === '/Login' && (
+            <Link className="w-min" to="/Register">
+              <Button>Register</Button>
             </Link>
-            <Button
-              onClick={() => {
-                logout();
-              }}
-            >
-              Logout
-            </Button>
-          </>
-        )}
+          )}
+
+          {user === undefined && pathname !== '/Login' && (
+            <Link className="w-min" to="/Login">
+              <Button>Login</Button>
+            </Link>
+          )}
+
+          {user !== undefined && (
+            <>
+              <Link to="/Post/Add">
+                <Button>Add Post</Button>
+              </Link>
+              <Link to={`/User/${user.id}`}>
+                <Button>Profile</Button>
+              </Link>
+              <Button
+                onClick={() => {
+                  logout();
+                }}
+              >
+                Logout
+              </Button>
+            </>
+          )}
+        </div>
       </nav>
     </header>
   );

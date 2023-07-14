@@ -1,17 +1,14 @@
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
 import type { UseQueryResult } from '@tanstack/react-query';
 import type { IUser } from '../../types/IUser';
+import Button from '../../components/common/Button';
 
-interface UserViewProperties {
-  userId?: string;
-}
-
-export default function ViewUser({ userId }: UserViewProperties): JSX.Element {
-  const { id: parameterId } = useParams();
-  const id = userId ?? parameterId;
+export default function ViewUser(): JSX.Element {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   if (typeof id !== 'string') throw new Error('id is not a string');
 
@@ -41,11 +38,15 @@ export default function ViewUser({ userId }: UserViewProperties): JSX.Element {
           <h1 className="pb-2 text-3xl font-bold">{u.username}&apos;s Profile</h1>
           <h2 className="ps-2">{`${u.firstName} ${u.lastName}, ${u.age}`}</h2>
 
-          <Link className="self-end" to="/">
-            <button className="mt-4 rounded-md bg-purple px-4 py-2 font-semibold text-white hover:bg-purple-dark">
+          <div className="flex w-full justify-end py-2">
+            <Button
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
               Back
-            </button>
-          </Link>
+            </Button>
+          </div>
         </div>
       )}
     </>

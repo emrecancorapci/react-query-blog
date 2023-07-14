@@ -20,7 +20,6 @@ const defaultUser: () => IUserToken | undefined = () => {
 const useAuthStore = create<AuthStore>((set) => ({
   user: defaultUser(),
   login: ({ token }: { token: string }) => {
-    console.log(token);
     const userData: IUserToken = jwtDecode(token);
     Cookies.set('token', token, { secure: true, sameSite: 'strict', expires: userData.exp });
     set({ user: userData });
