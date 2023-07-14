@@ -9,13 +9,11 @@ interface ButtonProperties extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = forwardRef<HTMLButtonElement, ButtonProperties>(
   ({ children, type = 'button', className = '', background, ...properties }, reference) => {
-    const bgDefault = `bg-${background?.default ?? 'purple-dark'}`;
-    const bgHover = `hover:bg-${background?.hover ?? 'purple'}`;
     return (
       <ButtonUI
         type={type}
         ref={reference}
-        className={`${bgDefault} font-semibold text-white ${bgHover} ${className}`}
+        className={`bg-purple-dark font-semibold text-white hover:bg-purple ${className}`}
         {...properties}
       >
         {children}

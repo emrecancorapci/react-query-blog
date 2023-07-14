@@ -14,6 +14,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProperties>(
           className={`w-full rounded-lg px-4 py-2 font-medium ${
             className ?? 'bg-purple-dark text-white hover:bg-purple'
           }`}
+          style={{ backgroundImage: 'none' }}
           id={id}
           rows={rows}
           ref={reference}

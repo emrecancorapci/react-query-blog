@@ -12,7 +12,8 @@ const Input = forwardRef<HTMLInputElement, InputProperties>(
     return (
       <>
         <input
-          className={`w-full rounded-lg px-4 py-2 font-medium ${className ?? 'bg-purple-dark text-white'}`}
+          className={`w-full rounded-lg px-4 py-2 font-medium ${className ?? 'bg-purple-dark/90 text-white'}`}
+          style={{ backgroundImage: 'none' }}
           id={id}
           ref={reference}
           type={type ?? 'text'}
