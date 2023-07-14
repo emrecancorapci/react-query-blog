@@ -68,7 +68,7 @@ export default function PostAddForm({ onSubmit }: PostAddFormProperties): JSX.El
       <label className="flex w-auto flex-col gap-2" htmlFor="tagsControl">
         <Title>Tags</Title>
         {fields.map((field, index) => (
-          <div className="flex w-full max-w-fit gap-4" key={field.id}>
+          <div className="flex w-full max-w-fit items-center gap-4" key={field.id}>
             <Input
               id="tagsControl"
               placeholder="Enter tag name"

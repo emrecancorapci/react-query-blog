@@ -5,7 +5,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 
 import type { UseInfiniteQueryResult } from '@tanstack/react-query';
-import type { IInfinitePostResponse } from '../types';
+import type { IInfinitePostResponse } from 'types';
 import Button from '../components/common/Button';
 
 export default function Home(): JSX.Element {
@@ -30,7 +30,7 @@ export default function Home(): JSX.Element {
       const response = await axios.get(url);
       return response.data as IInfinitePostResponse;
     },
-    getNextPageParam: (firstPage) => {
+    getNextPageParam: (firstPage: IInfinitePostResponse) => {
       if (firstPage === undefined || firstPage.skip + firstPage.limit >= firstPage.total || firstPage.skip < 0) return;
       return firstPage.skip + firstPage.limit;
     },
