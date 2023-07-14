@@ -1,15 +1,20 @@
-import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Button from './common/Button';
 import useAuthStore from '../stores/AuthStore';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../libraries/shadcn/components/ui/dropdown-menu';
 
 export default function Header(): JSX.Element {
   const { pathname } = useLocation();
   const [logout, user] = useAuthStore((state) => [state.logout, state.user]);
 
-  useEffect(() => {
-    console.log(pathname);
-  }, [pathname]);
   return (
     <header className="flex flex-col justify-center">
       <h1 className=" max-w-full px-2 py-4 text-center text-4xl font-black lg:px-16 lg:text-5xl">
@@ -48,19 +53,34 @@ export default function Header(): JSX.Element {
 
           {user !== undefined && (
             <>
-              <Link to="/Post/Add">
-                <Button>Add Post</Button>
-              </Link>
-              <Link to={`/User/${user.id}`}>
-                <Button>Profile</Button>
-              </Link>
-              <Button
-                onClick={() => {
-                  logout();
-                }}
-              >
-                Logout
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button>Menu</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-40 rounded-lg bg-purple-light">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <Link to="/Post/Add">
+                    <DropdownMenuItem className="rounded-md bg-purple-dark font-semibold text-white">
+                      Add Post
+                    </DropdownMenuItem>
+                  </Link>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <Link to={`/User/${user.id}`}>
+                      <DropdownMenuItem className="rounded-md">Profile</DropdownMenuItem>
+                    </Link>
+                    <DropdownMenuItem
+                      className="rounded-md"
+                      onClick={() => {
+                        logout();
+                      }}
+                    >
+                      Log out
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </>
           )}
         </div>
