@@ -1,36 +1,32 @@
+import { forwardRef } from 'react';
 import type { Ref, TextareaHTMLAttributes } from 'react';
 
 interface TextareaProperties extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   children?: JSX.Element | boolean | string;
-  ref?: Ref<HTMLTextAreaElement> | null | undefined;
-  inputTitle?: JSX.Element | string | undefined;
-  className?: string;
+  reference?: Ref<HTMLTextAreaElement> | null | undefined;
 }
 
-export default function Textarea({
-  inputTitle,
-  id,
-  ref,
-  rows,
-  placeholder,
-  className = 'bg-purple-dark text-white',
-  hidden = false,
-  disabled = false,
-  ...register
-}: TextareaProperties): JSX.Element {
-  return (
-    <>
-      {inputTitle !== undefined && <p className="pb-2 ps-2 font-semibold">{inputTitle}</p>}
-      <textarea
-        className={`w-full rounded-lg px-4 py-2 font-medium ${className}`}
-        id={id}
-        rows={rows}
-        ref={ref}
-        placeholder={placeholder}
-        hidden={hidden}
-        disabled={disabled}
-        {...register}
-      />
-    </>
-  );
-}
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProperties>(
+  ({ className, id, rows, placeholder, hidden, disabled, ...register }, reference) => {
+    return (
+      <>
+        <textarea
+          className={`w-full rounded-lg px-4 py-2 font-medium ${
+            className ?? 'bg-purple-dark text-white hover:bg-purple'
+          }`}
+          id={id}
+          rows={rows}
+          ref={reference}
+          placeholder={placeholder}
+          hidden={hidden}
+          disabled={disabled}
+          {...register}
+        />
+      </>
+    );
+  },
+);
+
+Textarea.displayName = 'Textarea';
+
+export default Textarea;

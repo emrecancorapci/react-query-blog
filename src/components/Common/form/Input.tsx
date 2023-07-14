@@ -1,34 +1,31 @@
+import { forwardRef } from 'react';
 import type { Ref, InputHTMLAttributes } from 'react';
 
 interface InputProperties extends InputHTMLAttributes<HTMLInputElement> {
   children?: JSX.Element | boolean | string;
   inputTitle?: JSX.Element | string | undefined;
-  ref?: Ref<HTMLInputElement> | null | undefined;
-  className?: string;
+  reference?: Ref<HTMLInputElement> | null | undefined;
 }
 
-export default function Input({
-  id,
-  ref,
-  type = 'text',
-  placeholder,
-  className = 'bg-purple-dark text-white',
-  hidden = false,
-  disabled = false,
-  ...register
-}: InputProperties): JSX.Element {
-  return (
-    <>
-      <input
-        className={`w-full rounded-lg px-4 py-2 font-medium ${className}`}
-        id={id}
-        ref={ref}
-        type={type}
-        placeholder={placeholder}
-        hidden={hidden}
-        disabled={disabled}
-        {...register}
-      />
-    </>
-  );
-}
+const Input = forwardRef<HTMLInputElement, InputProperties>(
+  ({ id, type, placeholder, className, hidden = false, disabled = false, ...register }, reference) => {
+    return (
+      <>
+        <input
+          className={`w-full rounded-lg px-4 py-2 font-medium ${className ?? 'bg-purple-dark text-white'}`}
+          id={id}
+          ref={reference}
+          type={type ?? 'text'}
+          placeholder={placeholder}
+          hidden={hidden}
+          disabled={disabled}
+          {...register}
+        />
+      </>
+    );
+  },
+);
+
+Input.displayName = 'Input';
+
+export default Input;

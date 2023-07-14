@@ -83,7 +83,7 @@ export default function Home(): JSX.Element {
             </Fragment>
           ))}
           <Button
-            reference={ref}
+            ref={ref}
             onClick={async () => await fetchNextPage()}
             disabled={!(hasNextPage ?? false) || isFetchingNextPage}
           >
