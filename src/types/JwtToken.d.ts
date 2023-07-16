@@ -1,4 +1,4 @@
-export interface IUserToken {
+export interface JwtToken {
   id: number;
   username: string;
   email: string;

@@ -3,18 +3,18 @@ import { useNavigate } from 'react-router-dom';
 
 import useAuthStore from '../stores/AuthStore';
 import useFetch from '../hooks/useFetch';
-import LoginForm from '../components/forms/auth/LoginForm';
+import LoginForm from 'comp/forms/auth/LoginForm';
 
-import type { FormInputs } from '../components/forms/auth/LoginForm';
-import type { IUserToken } from '../types';
+import type { FormInputs } from 'comp/forms/auth/LoginForm';
+import type { JwtToken } from 'types';
 
-interface ILoginResponse extends IUserToken {
+interface ServerResponse extends JwtToken {
   token: string;
 }
 
 export default function Login(): JSX.Element {
   const login = useAuthStore((state) => state.login);
-  const { response, error, isLoading, isError, isSuccess, fetch } = useFetch<FormInputs, ILoginResponse>();
+  const { response, error, isLoading, isError, isSuccess, fetch } = useFetch<FormInputs, ServerResponse>();
   const navigate = useNavigate();
 
   const onSubmit: (formData: FormInputs) => Promise<void> = async (formData: FormInputs) => {

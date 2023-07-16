@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import Header from './components/Header';
+import Header from 'comp/Header';
 import Router from './router';
 
 function App(): JSX.Element {

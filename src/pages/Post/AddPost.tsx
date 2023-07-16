@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import PostAddForm from '../../components/forms/post/AddPostForm';
+import PostAddForm from 'comp/forms/post/AddPostForm';
 import useAuthStore from '../../stores/AuthStore';
 
-import type { UseMutationResult } from '@tanstack/react-query';
 import type { AxiosResponse } from 'axios';
-import type { FormInputs } from '../../components/forms/post/AddPostForm';
-import type { IPostRequest, IPostResponse } from '../../types';
+import type { UseMutationResult } from '@tanstack/react-query';
+import type { FormInputs } from 'comp/forms/post/AddPostForm';
+import type { PostRequest, PostResponse } from 'types';
+
+type SubmitFunctionType = (formData: FormInputs) => Promise<void>;
 
 export default function AddPost(): JSX.Element {
   const user = useAuthStore((state) => state.user);
@@ -18,17 +20,18 @@ export default function AddPost(): JSX.Element {
     isSuccess,
     error,
     mutateAsync,
-  }: UseMutationResult<AxiosResponse<IPostResponse>, Error, FormInputs, void> = useMutation({
+  }: UseMutationResult<AxiosResponse<PostResponse>, Error, FormInputs, void> = useMutation({
     mutationFn: async (formData: FormInputs) => {
       if (user === undefined) {
         throw new Error('User not logged in.');
       }
-      const request: IPostRequest = {
+      const request: PostRequest = {
         ...formData,
         tags: formData.tags.map((tag) => tag.tag),
         userId: user.id,
       };
-      return await axios.post<IPostResponse>('https://dummyjson.com/posts/add', request);
+
+      return await axios.post<PostResponse>('https://dummyjson.com/posts/add', request);
     },
     onSuccess: (data) => {
       const post = data.data;
@@ -36,7 +39,7 @@ export default function AddPost(): JSX.Element {
     },
   });
 
-  const onSubmit: (formData: FormInputs) => Promise<void> = async (formData: FormInputs) => {
+  const onSubmit: SubmitFunctionType = async (formData: FormInputs) => {
     console.log(formData);
     await mutateAsync(formData);
   };

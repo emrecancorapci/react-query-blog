@@ -2,9 +2,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
+import Button from 'comp/common/Button';
+
 import type { UseQueryResult } from '@tanstack/react-query';
-import type { IUser } from '../../types/IUser';
-import Button from '../../components/common/Button';
+import type { User } from 'types';
 
 export default function ViewUser(): JSX.Element {
   const { id } = useParams();
@@ -17,11 +18,11 @@ export default function ViewUser(): JSX.Element {
     isLoading,
     isError,
     error,
-  }: UseQueryResult<IUser, Error> = useQuery({
+  }: UseQueryResult<User, Error> = useQuery({
     queryKey: ['users', id],
-    queryFn: async () => await axios.get(`https://dummyjson.com/users/${id}`),
-    select(data) {
-      return data.data as IUser;
+    queryFn: async () => {
+      const response = await axios.get(`https://dummyjson.com/users/${id}`);
+      return response.data as User;
     },
   });
 

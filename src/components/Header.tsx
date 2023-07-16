@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+
 import Button from './common/Button';
 import useAuthStore from '../stores/AuthStore';
 import {
@@ -9,7 +10,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../libraries/shadcn/components/ui/dropdown-menu';
+} from 'lib/shadcn/components/ui/dropdown-menu';
 
 export default function Header(): JSX.Element {
   const { pathname } = useLocation();

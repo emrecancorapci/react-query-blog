@@ -1,4 +1,4 @@
-export interface IAddress {
+export interface PhysicalAddress {
   address: string;
   city: string;
   coordinates: {

@@ -2,11 +2,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
-import Button from '../../components/common/Button';
-import Comments from '../../components/Comments';
+import Button from 'comp/common/Button';
+import Comments from 'comp/Comments';
 
 import type { UseQueryResult } from '@tanstack/react-query';
-import type { IPostResponse } from '../../types';
+import type { PostResponse } from 'types';
 
 export default function ViewPost(): JSX.Element {
   const { id } = useParams();
@@ -20,11 +20,11 @@ export default function ViewPost(): JSX.Element {
     isLoading,
     isError,
     error,
-  }: UseQueryResult<IPostResponse, Error> = useQuery({
+  }: UseQueryResult<PostResponse, Error> = useQuery({
     queryKey: ['posts', Number(id)],
-    queryFn: async () => await axios.get(`https://dummyjson.com/posts/${id}`),
-    select(data) {
-      return data.data;
+    queryFn: async () => {
+      const data = await axios.get(`https://dummyjson.com/posts/${id}`);
+      return data.data as PostResponse;
     },
   });
 

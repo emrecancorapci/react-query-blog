@@ -24,7 +24,7 @@
     "paths": {
       "lib/*": ["./src/libraries/*"],
       "src/*": ["./src/*"],
-      "components/*": ["./src/components/*"],
+      "comp/*": ["./src/components/*"],
       "types": ["./src/types/index.ts"],
       "types/*": ["./src/types/*"],
     }

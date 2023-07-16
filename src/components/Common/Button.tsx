@@ -1,5 +1,5 @@
 import { type Ref, type ButtonHTMLAttributes, forwardRef } from 'react';
-import { Button as ButtonUI } from '../../libraries/shadcn/components/ui/button';
+import { Button as ButtonUI } from 'lib/shadcn/components/ui/button';
 
 interface ButtonProperties extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: JSX.Element | string;

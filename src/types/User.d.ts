@@ -1,8 +1,8 @@
-import type { IAddress } from './other/IAddress';
-import type { ICompany } from './other/ICompany';
+import type { PhysicalAddress } from './other/PhysicalAddress';
+import type { Company } from './other/Company';
 
 // Damn. Whyyy so much info?
-export interface IUser {
+export interface User {
   id: number;
   firstName: string;
   lastName: string;
@@ -25,7 +25,7 @@ export interface IUser {
   };
   domain: string;
   ip: string;
-  address: IAddress;
+  address: PhysicalAddress;
   macAddress: string;
   university: string;
   bank: {
@@ -35,7 +35,7 @@ export interface IUser {
     currency: string;
     iban: string;
   };
-  company: ICompany;
+  company: Company;
   ein: string;
   ssn: string;
   userAgent: string;

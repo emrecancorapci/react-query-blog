@@ -1,8 +1,8 @@
 import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form';
 import { useEffect } from 'react';
 
-import Button from '../../common/Button';
-import { Input, Textarea, Title, FormAlert } from '../../common/form';
+import Button from 'comp/common/Button';
+import { Input, Textarea, Title, FormAlert } from 'comp/common/form';
 
 export interface FormInputs {
   title: string;
