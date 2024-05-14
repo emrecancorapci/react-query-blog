@@ -1,8 +1,8 @@
-import { create } from 'zustand';
 import Cookies from 'js-cookie';
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
+import { create } from 'zustand';
 
-import type { JwtToken } from 'types';
+import type { JwtToken } from '@/types';
 
 interface AuthStore {
   user: JwtToken | undefined;
@@ -12,7 +12,7 @@ interface AuthStore {
 
 const defaultUser: () => JwtToken | undefined = () => {
   const token = Cookies.get('token');
-  if (token !== undefined) {
+  if (token) {
     return jwtDecode(token);
   }
 };

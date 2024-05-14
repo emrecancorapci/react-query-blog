@@ -1,5 +1,4 @@
-import { forwardRef } from 'react';
-import type { Ref, InputHTMLAttributes } from 'react';
+import { forwardRef, type InputHTMLAttributes, type Ref } from 'react';
 
 interface InputProperties extends InputHTMLAttributes<HTMLInputElement> {
   children?: JSX.Element | boolean | string;
@@ -7,13 +6,15 @@ interface InputProperties extends InputHTMLAttributes<HTMLInputElement> {
   reference?: Ref<HTMLInputElement> | null | undefined;
 }
 
+const formInputStyle = { backgroundImage: 'none' };
+
 const Input = forwardRef<HTMLInputElement, InputProperties>(
   ({ id, type, placeholder, className, hidden = false, disabled = false, ...register }, reference) => {
     return (
       <>
         <input
           className={`w-full rounded-lg px-4 py-2 font-medium ${className ?? 'bg-purple-dark/90 text-white'}`}
-          style={{ backgroundImage: 'none' }}
+          style={formInputStyle}
           id={id}
           ref={reference}
           type={type ?? 'text'}

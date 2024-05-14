@@ -3,3 +3,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply flex justify-center h-screen w-full overflow-x-hidden bg-white overflow-y-scroll;
+}
+
+#root {
+  @apply flex max-w-full flex-col text-black lg:max-w-screen-lg;
+}

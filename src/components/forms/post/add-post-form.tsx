@@ -1,8 +1,8 @@
-import { useForm, type SubmitHandler, useFieldArray } from 'react-hook-form';
 import { useEffect } from 'react';
+import { type SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 
-import Button from 'comp/common/Button';
-import { Input, Textarea, Title, FormAlert } from 'comp/common/form';
+import Button from '@/components/common/button';
+import { FormAlert, Input, Textarea, Title } from '@/components/common/form';
 
 export interface FormInputs {
   title: string;
@@ -10,11 +10,11 @@ export interface FormInputs {
   tags: Array<{ tag: string }>;
 }
 
-interface PostAddFormProperties {
+interface Properties {
   onSubmit: SubmitHandler<FormInputs>;
 }
 
-export default function PostAddForm({ onSubmit }: PostAddFormProperties): JSX.Element {
+export default function PostAddForm({ onSubmit }: Properties) {
   const {
     register,
     handleSubmit,

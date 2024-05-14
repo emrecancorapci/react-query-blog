@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import axios, { type AxiosRequestConfig } from 'axios';
+import { useState } from 'react';
 
 interface FetchProperties<TRequest> {
   url: string;
@@ -8,27 +8,25 @@ interface FetchProperties<TRequest> {
   config?: AxiosRequestConfig;
 }
 
-interface useFetchResponse<TRequest, DResponse> {
+interface UseFetch<TRequest, TResponse> {
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
   error: { message: string };
-  response: DResponse | undefined;
-  fetch: FetchFunction<TRequest>;
+  response: TResponse | undefined;
+  fetch: (properties: FetchProperties<TRequest>) => Promise<void>;
 }
 
-type FetchFunction<TRequest> = ({ url, data, method, config }: FetchProperties<TRequest>) => Promise<void>;
-
-function useFetch<TRequest, DResponse>(): useFetchResponse<TRequest, DResponse> {
+function useFetch<TRequest, TResponse>(): UseFetch<TRequest, TResponse> {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [error, setError] = useState({ message: '' });
-  const [response, setResponse] = useState<DResponse | undefined>();
+  const [response, setResponse] = useState<TResponse | undefined>();
 
-  const fetch: FetchFunction<TRequest> = async ({ url, data, method, config }: FetchProperties<TRequest>) => {
+  const fetch = async ({ url, data, method, config }: FetchProperties<TRequest>) => {
     setIsLoading(true);
-    const promise = axios[method ?? 'get']<DResponse>(url, data, config)
+    const promise = axios[method ?? 'get']<TResponse>(url, data, config)
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           setResponse(response.data);

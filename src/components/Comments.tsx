@@ -1,26 +1,25 @@
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-import type { UseQueryResult } from '@tanstack/react-query';
-import type { Comment } from 'types';
-import { DummyResponse } from 'src/types/DummyResponse';
-
-interface CommentsProperties {
-  postId: number;
-}
+import type { Comment } from '@/types';
+import { DummyResponse } from '@/types/dummy-response';
 
 interface CommentsResponse extends DummyResponse {
   comments: Comment[];
 }
 
-export default function Comments({ postId }: CommentsProperties): JSX.Element {
+interface Properties {
+  postId: number;
+}
+
+export default function Comments({ postId }: Properties) {
   const {
     data: comments,
-    isLoading,
+    isPending,
     isError,
     error,
-  }: UseQueryResult<Comment[], Error> = useQuery({
+  } = useQuery({
     enabled: postId !== undefined,
     queryKey: ['comments', postId],
     queryFn: async () => {
@@ -31,7 +30,7 @@ export default function Comments({ postId }: CommentsProperties): JSX.Element {
 
   return (
     <>
-      {isLoading ? (
+      {isPending ? (
         <p>Loading...</p>
       ) : isError ? (
         <p>Error: {error.message}</p>

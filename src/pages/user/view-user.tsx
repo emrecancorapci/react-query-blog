@@ -1,13 +1,11 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import Button from 'comp/common/Button';
+import Button from '@/components/common/button';
+import type { User } from '@/types';
 
-import type { UseQueryResult } from '@tanstack/react-query';
-import type { User } from 'types';
-
-export default function ViewUser(): JSX.Element {
+export default function ViewUser() {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -15,10 +13,10 @@ export default function ViewUser(): JSX.Element {
 
   const {
     data: u,
-    isLoading,
+    isPending,
     isError,
     error,
-  }: UseQueryResult<User, Error> = useQuery({
+  } = useQuery({
     queryKey: ['users', id],
     queryFn: async () => {
       const response = await axios.get(`https://dummyjson.com/users/${id}`);
@@ -28,7 +26,7 @@ export default function ViewUser(): JSX.Element {
 
   return (
     <>
-      {isLoading ? (
+      {isPending ? (
         <p>Loading...</p>
       ) : isError ? (
         <p>Error: {error.message}</p>

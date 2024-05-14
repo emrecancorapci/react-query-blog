@@ -1,10 +1,10 @@
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import Login from './pages/Login';
-import Home from './pages/Home';
-import ViewPost from './pages/post/ViewPost';
-import ViewUser from './pages/user/ViewUser';
-import AddPost from './pages/post/AddPost';
+import Home from './pages/home';
+import Login from './pages/login';
+import AddPost from './pages/post/add-post';
+import ViewPost from './pages/post/view-post';
+import ViewUser from './pages/user/view-user';
 
 export default function Router(): JSX.Element {
   return (

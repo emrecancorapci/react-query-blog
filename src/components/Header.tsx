@@ -1,7 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
 
-import Button from './common/Button';
-import useAuthStore from '../stores/AuthStore';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,16 +8,19 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from 'lib/shadcn/components/ui/dropdown-menu';
+} from '@/components/ui/dropdown-menu';
+import useAuthStore from '@/stores/auth-store';
 
-export default function Header(): JSX.Element {
+import Button from './common/button';
+
+export default function Header() {
   const { pathname } = useLocation();
   const [logout, user] = useAuthStore((state) => [state.logout, state.user]);
 
   return (
     <header className="flex flex-col justify-center">
       <h1 className=" max-w-full px-2 py-4 text-center text-4xl font-black lg:px-16 lg:text-5xl">
-        A Basic Blog Site using{' '}
+        An Infinite Blog Site using{' '}
         <a
           className="text-purple-dark hover:text-purple active:text-purple-light"
           href="https://tanstack.com/query/v4/"

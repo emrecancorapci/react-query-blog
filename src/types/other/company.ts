@@ -1,4 +1,4 @@
-import type { PhysicalAddress } from './PhysicalAddress';
+import type { PhysicalAddress } from './physical-address';
 
 export interface Company {
   address: PhysicalAddress;

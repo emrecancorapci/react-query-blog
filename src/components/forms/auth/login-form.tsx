@@ -1,16 +1,19 @@
-import { useForm } from 'react-hook-form';
-
-import Button from 'comp/common/Button';
-
 import type { SubmitHandler } from 'react-hook-form';
-import { Input, Title, FormAlert } from 'comp/common/form';
+import { useForm } from 'react-hook-form';
+import { FormAlert, Input, Title } from 'src/components/common/form';
+
+import Button from '@/components/common/button';
 
 export interface FormInputs {
   username: string;
   password: string;
 }
 
-export default function LoginForm({ onSubmit }: { onSubmit: SubmitHandler<FormInputs> }): JSX.Element {
+interface Properties {
+  onSubmit: SubmitHandler<FormInputs>;
+}
+
+export default function LoginForm({ onSubmit }: Properties) {
   const {
     register,
     handleSubmit,

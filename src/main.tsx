@@ -1,30 +1,24 @@
+import './index.css';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { StrictMode as React } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-// eslint-disable-next-line import/named
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import App from './App.tsx';
-import './index.css';
+import App from '@/app.tsx';
 
 const queryClient = new QueryClient();
 
-const body = document.querySelector('body') as HTMLElement;
-body.className = 'flex justify-center h-screen w-full overflow-x-hidden bg-white overflow-y-scroll';
-
-const dom = document.querySelector('#root') as HTMLElement;
-dom.className = 'flex max-w-full flex-col text-black lg:max-w-screen-lg';
-
-const root = createRoot(dom);
+const root = createRoot(document.querySelector('#root') as HTMLDivElement);
 
 root.render(
   <React>
-    <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
         <App />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   </React>,
 );

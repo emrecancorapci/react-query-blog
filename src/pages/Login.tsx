@@ -1,25 +1,27 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import useAuthStore from '../stores/AuthStore';
-import useFetch from '../hooks/useFetch';
-import LoginForm from 'comp/forms/auth/LoginForm';
-
-import type { FormInputs } from 'comp/forms/auth/LoginForm';
-import type { JwtToken } from 'types';
+import type { FormInputs } from '@/components/forms/auth/login-form';
+import LoginForm from '@/components/forms/auth/login-form';
+import useFetch from '@/hooks/use-fetch';
+import useAuthStore from '@/stores/auth-store';
+import type { JwtToken } from '@/types';
 
 interface ServerResponse extends JwtToken {
   token: string;
 }
 
-export default function Login(): JSX.Element {
+export default function Login() {
   const login = useAuthStore((state) => state.login);
   const { response, error, isLoading, isError, isSuccess, fetch } = useFetch<FormInputs, ServerResponse>();
   const navigate = useNavigate();
 
-  const onSubmit: (formData: FormInputs) => Promise<void> = async (formData: FormInputs) => {
-    await fetch({ url: 'https://dummyjson.com/auth/login', method: 'post', data: formData });
-  };
+  const onSubmit: (formData: FormInputs) => Promise<void> = useCallback(
+    async (formData: FormInputs) => {
+      await fetch({ url: 'https://dummyjson.com/auth/login', method: 'post', data: formData });
+    },
+    [fetch],
+  );
 
   useEffect(() => {
     if (isSuccess && response !== undefined) {

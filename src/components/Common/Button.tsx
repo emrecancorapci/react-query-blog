@@ -1,5 +1,6 @@
-import { type Ref, type ButtonHTMLAttributes, forwardRef } from 'react';
-import { Button as ButtonUI } from 'lib/shadcn/components/ui/button';
+import { type ButtonHTMLAttributes, forwardRef, type Ref } from 'react';
+
+import { Button as ButtonUI } from '@/components/ui/button';
 
 interface ButtonProperties extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: JSX.Element | string;
@@ -8,7 +9,7 @@ interface ButtonProperties extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProperties>(
-  ({ children, type = 'button', className = '', background, ...properties }, reference) => {
+  ({ children, type = 'button', className, background, ...properties }, reference) => {
     return (
       <ButtonUI
         type={type}

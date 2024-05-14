@@ -1,5 +1,5 @@
-import type { PhysicalAddress } from './other/PhysicalAddress';
-import type { Company } from './other/Company';
+import type { Company } from './other/company';
+import type { PhysicalAddress } from './other/physical-address';
 
 // Damn. Whyyy so much info?
 export interface User {

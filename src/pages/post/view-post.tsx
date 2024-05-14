@@ -1,14 +1,12 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
+import Comments from 'src/components/comments';
 
-import Button from 'comp/common/Button';
-import Comments from 'comp/Comments';
+import Button from '@/components/common/button';
+import type { PostResponse } from '@/types';
 
-import type { UseQueryResult } from '@tanstack/react-query';
-import type { PostResponse } from 'types';
-
-export default function ViewPost(): JSX.Element {
+export default function ViewPost() {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -17,10 +15,10 @@ export default function ViewPost(): JSX.Element {
 
   const {
     data: post,
-    isLoading,
+    isPending,
     isError,
     error,
-  }: UseQueryResult<PostResponse, Error> = useQuery({
+  } = useQuery({
     queryKey: ['posts', Number(id)],
     queryFn: async () => {
       const data = await axios.get(`https://dummyjson.com/posts/${id}`);
@@ -30,7 +28,7 @@ export default function ViewPost(): JSX.Element {
 
   return (
     <>
-      {isLoading ? (
+      {isPending ? (
         <p>Loading...</p>
       ) : isError ? (
         <p>Error: {error.message}</p>
