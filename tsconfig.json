@@ -22,11 +22,8 @@
 
     "baseUrl": ".",
     "paths": {
-      "lib/*": ["./src/libraries/*"],
-      "src/*": ["./src/*"],
-      "comp/*": ["./src/components/*"],
-      "types": ["./src/types/index.ts"],
-      "types/*": ["./src/types/*"],
+      "@/*": ["./src/*"],
+      "@/types": ["./src/types/index.ts"],
     }
   },
   "include": ["src"],
