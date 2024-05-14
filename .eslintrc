@@ -1,8 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2022": true,
-    "node": true
+    "node": true,
+    "es2024": true
   },
   "settings": {
     "import/parsers": {
@@ -12,78 +12,74 @@
       ]
     },
     "import/resolver": {
-      "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
-        ]
-      },
-      "typescript": {}
+      "typescript": true,
+      "node": true
     },
     "react": {
       "version": "detect"
     }
   },
-  "overrides": [
-    {
-      "files": [
-        "**/*.test.ts",
-        "**/*.test.tsx"
-      ],
-      "env": {
-        "jest": true
-      }
-    }
-  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": true,
+    "project": [
+      "./tsconfig.json",
+      "./tsconfig.node.json"
+    ],
     "tsconfigRootDir": "./"
   },
   "plugins": [
-    "@typescript-eslint",
-    "react",
-    "prettier",
-    "tailwindcss",
-    "react-hooks",
-    "jsx-a11y",
-    "promise",
-    "import",
-    "unicorn",
-    "testing-library",
-    "react-refresh"
+    "@typescript-eslint", // Ready for flat config
+    "import", // Not ready for flat config yet: https://github.com/import-js/eslint-plugin-import/issues/2948
+    "jsx-a11y", // Not ready for flat config yet: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/978
+    "react", // Not ready for flat config yet: https://github.com/jsx-eslint/eslint-plugin-react/issues/3699
+    "prettier", // Ready for flat config
+    "promise", // NOT ready for flat config yet: https://github.com/eslint-community/eslint-plugin-promise/issues/449
+    "react-hooks", // NOT ready for flat config yet: https://github.com/facebook/react/issues/28313
+    "react-hook-form", // NOT ready for flat config (and won't be for a while)
+    "react-refresh", // Ready for flat config
+    "react-perf", // NOT ready for flat config (and won't be for a while)
+    "regexp", // Ready for flat config
+    "simple-import-sort", // Ready for flat config
+    "tailwindcss", // NOT ready for flat config yet: https://github.com/francoismassart/eslint-plugin-tailwindcss/issues/335
+    "unicorn" // Ready for flat config
   ],
   "extends": [
     "eslint:recommended",
     "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:react/recommended",
-    "plugin:jsx-a11y/recommended",
-    "plugin:unicorn/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:security/recommended",
-    "plugin:promise/recommended",
     "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:jsx-a11y/recommended",
     "plugin:n/recommended",
+    "plugin:promise/recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
+    "plugin:react-hook-form/recommended",
+    "plugin:react-perf/recommended",
+    "plugin:regexp/recommended",
+    "plugin:security/recommended-legacy",
     "plugin:tailwindcss/recommended",
+    "plugin:unicorn/recommended",
     "prettier"
   ],
   "rules": {
     "@typescript-eslint/no-unsafe-assignment": "warn",
     "@typescript-eslint/no-unsafe-member-access": "warn",
     "@typescript-eslint/no-unsafe-return": "warn",
-    "@typescript-eslint/no-unused-vars" : "off",
-    "@typescript-eslint/no-misused-promises": [2, {
-      "checksVoidReturn": {
-        "attributes": false
+    "@typescript-eslint/no-unused-vars": "off", // Because VSCode already does this
+    "@typescript-eslint/no-misused-promises": [
+      2,
+      {
+        "checksVoidReturn": {
+          "attributes": false
+        }
       }
-    }],
-    "n/no-missing-import": "off",
-    "no-unused-vars": "off",
+    ],
+    "n/no-missing-import": "off", // TypeScript already does this
+    "no-unused-vars": "off", // Because VSCode already does this
     "no-unused-expressions": [
       "error",
       {
@@ -91,30 +87,29 @@
       }
     ],
     "jsx-a11y/anchor-is-valid": "warn",
+    "jsx-a11y/media-has-caption": "warn",
     "prettier/prettier": "warn",
-    "promise/catch-or-return": "error",
-    "promise/no-new-statics": "error",
-    "promise/no-return-wrap": "error",
-    "promise/param-names": "error",
-    "promise/avoid-new": "warn",
-    "promise/no-callback-in-promise": "warn",
-    "promise/no-nesting": "warn",
-    "promise/no-promise-in-callback": "warn",
-    "promise/no-return-in-finally": "warn",
-    "promise/valid-params": "warn",
-    "promise/always-return": "off",
-    "promise/no-native": "off",
-    "react/prop-types": "off",
+    "promise/always-return": "off", // Bad for hooks
+    "react/prop-types": "off", // No one likes prop-types
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react-refresh/only-export-components": "warn",
-    "testing-library/await-async-query": "error",
-    "testing-library/no-await-sync-query": "error",
-    "testing-library/no-debugging-utils": "warn",
-    "testing-library/no-dom-import": "off",
+    "react-perf/jsx-no-new-function-as-prop": "warn",
+    "react-refresh/only-export-components": [
+      "warn",
+      {
+        "allowConstantExport": true
+      }
+    ],
+    "simple-import-sort/imports": "warn",
+    "simple-import-sort/exports": "warn",
     "unicorn/expiring-todo-comments": "off",
-    "unicorn/filename-case": "off",
+    "unicorn/filename-case": [
+      "warn",
+      {
+        "case": "kebabCase"
+      }
+    ],
     "unicorn/no-useless-undefined": "warn",
     "unicorn/prevent-abbreviations": "warn"
   }
